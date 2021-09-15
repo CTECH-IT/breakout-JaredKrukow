@@ -9,12 +9,27 @@ let dy = -2;
 
 let ballRadius = 10;
 
+let paddleHeight = 10;
+let paddleWidth = 75;
+let paddle = (canvas.width-paddleWidth) / 2;
+
+let rightPressed = false;
+let leftPressed = false;
+
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
+}
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closepath();
 }
 
 function draw() {
@@ -29,12 +44,35 @@ function draw() {
     y += dy;
 
     // check to see if we're gone off the edge of the board
-    if (x > canvas.width || y < 0) {
+    if (x > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
-    if(y > canvas.height || y < 0) {
+    if(y > canvas.height - ballRadius || y + dy < ballRadius) {
         dy = -dy;
     }
-    
+
 }
+setInterval(draw, 10);
+
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed= true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed= true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.kay == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if (e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }
+}
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
 setInterval(draw, 10);
