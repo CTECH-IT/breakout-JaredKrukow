@@ -74,7 +74,7 @@ function draw() {
 }
 
 function keyDownHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
+    if(e.key == "Right" || e.key == "ArrowRight") { 
         rightPressed= true;
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
@@ -83,7 +83,7 @@ function keyDownHandler(e) {
 }
 
 function keyUpHandler(e) {
-    if(e.key == "Right" || e.kay == "ArrowRight") {
+    if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = false;
     }
     else if (e.key == "Left" || e.key == "ArrowLeft") {
