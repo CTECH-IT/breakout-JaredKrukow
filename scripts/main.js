@@ -55,8 +55,8 @@ function draw() {
     }
 
 
-    /*
-    // paddle controls 
+    
+    //paddle controls 
     if(rightPressed) {
         paddleX += 7;
         if (paddleX + paddleWidth > canvas.width){
@@ -65,7 +65,10 @@ function draw() {
     }
     else if (leftPressed) {
         paddleX -= 7;
-    } */
+        if (paddleX < 0){
+            paddleX= 0;
+        }
+    } 
 
     drawPaddle();
 }
