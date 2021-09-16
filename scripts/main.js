@@ -52,6 +52,19 @@ function draw() {
     }
 
 }
+
+// paddle controls 
+if(rightPressed) {
+    paddleX += 7;
+}
+else if (leftPressed) {
+    paddleX -= 7;
+}
+
+drawPaddle();
+
+
+
 setInterval(draw, 10);
 
 function keyDownHandler(e) {
