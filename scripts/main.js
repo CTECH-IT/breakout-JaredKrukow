@@ -47,11 +47,14 @@ function draw() {
     y += dy;
 
     // check to see if we're gone off the edge of the board
-    if (x > canvas.width - ballRadius || x + dx < ballRadius) {
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
-    if(y > canvas.height - ballRadius || y + dy < ballRadius) {
-        dy = -dy;
+    if (y + dy < ballRadius) { // ceiling check
+    } else if (y + dy > canvas.height-ballRadius) { // floor check
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(interval); // Needed for browser to end game
     }
 
 
@@ -94,4 +97,4 @@ function keyUpHandler(e) {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
-setInterval(draw, 10);
+let interval = setInterval(draw, 10);
