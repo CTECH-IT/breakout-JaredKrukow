@@ -52,9 +52,13 @@ function draw() {
     }
     if (y + dy < ballRadius) { // ceiling check
     } else if (y + dy > canvas.height-ballRadius) { // floor check
+        if(x > paddleX && x < paddleX + paddleWidth) { // paddle check
+            dy= -dy;
+        }else { // it hit the floor!
         alert("GAME OVER");
         document.location.reload();
         clearInterval(interval); // Needed for browser to end game
+        }
     }
 
 
