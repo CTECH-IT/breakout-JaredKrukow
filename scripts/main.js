@@ -16,12 +16,21 @@ let paddleX = (canvas.width-paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
 
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
+let brickRowCount = 3;
+let brickColumnCount=5;
+let brickWidth = 75;
+let brickHeight = 20;
+let Brickpadding = 10;
+let brickOffsetTop = 30;
+let brickOffsetLeft = 30;
+
+// set up a 2-dimensional array for bricks
+let bricks = [];
+for (let c=0; c < brickColumnCount; c++) {
+    bricks [c] = [];
+    for(let r=0; r < brickRowCount; r++) {
+        bricks [c][r] = { x: 0, y: 0 };
+    }
 }
 
 function drawPaddle() {
@@ -41,7 +50,14 @@ function draw() {
     
     // draw the ball
     drawBall();
-    
+    function drawBall() {
+
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
     // change the x and y values for the ball
     x += dx;
     y += dy;
@@ -51,6 +67,7 @@ function draw() {
         dx = -dx;
     }
     if (y + dy < ballRadius) { // ceiling check
+        dy = -dy;
     } else if (y + dy > canvas.height-ballRadius) { // floor check
         if(x > paddleX && x < paddleX + paddleWidth) { // paddle check
             dy= -dy;
@@ -101,4 +118,4 @@ function keyUpHandler(e) {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
-let interval = setInterval(draw, 10);
+let interval = setInterval(draw, 10); 
