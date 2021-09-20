@@ -43,6 +43,7 @@ function drawPaddle() {
     ctx.closepath();
 }
 
+
 function drawBricks() {
     for(let c=0; c<brickColumnCount; c++) {
         for(let r=0; r<brickRowCount; r++) {
@@ -57,13 +58,15 @@ function drawBricks() {
             ctx.closePath();
         }
     }
-}
+}    
 
 function draw() {
 
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+    drawBricks(); // draw the bricks
+
     // draw the ball
     drawBall();
     function drawBall() {
@@ -77,7 +80,7 @@ function draw() {
     // change the x and y values for the ball
     x += dx;
     y += dy;
-
+    
     // check to see if we're gone off the edge of the board
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
@@ -93,9 +96,7 @@ function draw() {
         clearInterval(interval); // Needed for browser to end game
         }
     }
-
-
-    
+  
     //paddle controls 
     if(rightPressed) {
         paddleX += 7;
