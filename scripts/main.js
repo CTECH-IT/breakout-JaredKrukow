@@ -43,6 +43,22 @@ function drawPaddle() {
     ctx.closepath();
 }
 
+function drawBricks() {
+    for(let c=0; c<brickColumnCount; c++) {
+        for(let r=0; r<brickRowCount; r++) {
+            let brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+            let brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+}
+
 function draw() {
 
     // clear the canvas
@@ -71,7 +87,7 @@ function draw() {
     } else if (y + dy > canvas.height-ballRadius) { // floor check
         if(x > paddleX && x < paddleX + paddleWidth) { // paddle check
             dy= -dy;
-        }else { // it hit the floor!
+        } else { // it hit the floor!
         alert("GAME OVER");
         document.location.reload();
         clearInterval(interval); // Needed for browser to end game
