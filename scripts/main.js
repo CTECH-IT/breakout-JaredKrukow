@@ -23,6 +23,7 @@ let brickHeight = 20;
 let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
+let score = 0
 
 // set up a 2-dimensional array for bricks
 let bricks = [];
@@ -119,7 +120,8 @@ function draw() {
 
     // check wether the ball is touching any bricks
     collisionDetection();
-    
+
+    drawScore();
 }
 
 function keyDownHandler(e) {
@@ -137,13 +139,26 @@ function collisionDetection() {
             let b = bricks[c][r];
             if (b.show == true) {
                 if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                dy = -dy;
-                b.show = false;
+                    dy = -dy;
+                    b.show = false;
+                    score++;
+                    if (score == brickRowCount * brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS1");
+                        document.location.reload();
+                        clearInterval(interval); // Needed for browser to end game
+                    }
                 }
             }
         }
     }
 }
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: " + score, 8, 20);
+}
+
 
 function keyUpHandler(e) {
     if (e.key == "Right" || e.key == "ArrowRight") {
@@ -154,7 +169,16 @@ function keyUpHandler(e) {
     }
 }
 
+function mouseMoveHanderler(e) {
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relative - paddleWidth / 2;
+    }
+}
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+document.addEventListener("mousemove", mouseMoveHandler, false);
 
 let interval = setInterval(draw, 10);
