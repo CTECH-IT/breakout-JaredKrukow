@@ -20,7 +20,7 @@ let brickRowCount = 3;
 let brickColumnCount=5;
 let brickWidth = 75;
 let brickHeight = 20;
-let Brickpadding = 10;
+let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 
@@ -40,7 +40,7 @@ function drawPaddle() {
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
-    ctx.closepath();
+    ctx.closePath();
 }
 
 
@@ -65,10 +65,12 @@ function draw() {
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    drawBricks(); // draw the bricks
+    // draw the bricks
+    drawBricks();
 
     // draw the ball
     drawBall();
+
     function drawBall() {
 
         ctx.beginPath();
