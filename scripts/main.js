@@ -169,10 +169,10 @@ function keyUpHandler(e) {
     }
 }
 
-function mouseMoveHanderler(e) {
+function mouseMoveHandler(e) {
     let relativeX = e.clientX - canvas.offsetLeft;
     if (relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relative - paddleWidth / 2;
+        paddleX = relativeX - paddleWidth / 2;
     }
 }
 
